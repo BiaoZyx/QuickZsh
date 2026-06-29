@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 # ============================================================
 # Alpine Linux Zsh 安装脚本
-# 基于通用脚本改造，专为 Alpine 优化
 # 使用 apk 安装所有插件，无需克隆 GitHub
 # ============================================================
 
@@ -17,13 +16,10 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 # ============================================================
-# 运行时配置
+# 日志
 # ============================================================
 LOG_FILE="$HOME/.zsh_install_alpine_$(date +%Y%m%d_%H%M%S).log"
 
-# ============================================================
-# 日志函数
-# ============================================================
 log_info() {
     echo -e "${BLUE}[*] $1${NC}" | tee -a "$LOG_FILE"
 }
@@ -41,7 +37,7 @@ log_error() {
 }
 
 # ============================================================
-# 检查是否以 root 运行
+# 检查运行用户
 # ============================================================
 if [ "$(id -u)" -eq 0 ]; then
     log_error "请勿以 root 直接运行，使用普通用户 + doas"
@@ -49,13 +45,13 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # ============================================================
-# 安装 shadow（提供 chsh 命令）
+# 1. 安装 shadow（提供 chsh）
 # ============================================================
 log_info "安装 shadow（chsh）..."
 doas apk add shadow 2>&1 | tee -a "$LOG_FILE"
 
 # ============================================================
-# 安装 Zsh 和相关插件（通过 apk）
+# 2. 安装 Zsh 和插件
 # ============================================================
 log_info "安装 Zsh 和插件..."
 doas apk add \
@@ -68,7 +64,7 @@ doas apk add \
     2>&1 | tee -a "$LOG_FILE"
 
 # ============================================================
-# 验证安装
+# 3. 验证安装
 # ============================================================
 log_info "验证安装..."
 if ! command -v zsh >/dev/null 2>&1; then
@@ -78,7 +74,7 @@ fi
 log_success "Zsh 安装成功"
 
 # ============================================================
-# 备份现有 .zshrc
+# 4. 备份现有 .zshrc
 # ============================================================
 if [ -f ~/.zshrc ]; then
     BACKUP="$HOME/.zshrc.backup.$(date +%Y%m%d_%H%M%S)"
@@ -87,14 +83,14 @@ if [ -f ~/.zshrc ]; then
 fi
 
 # ============================================================
-# 生成 Alpine 专用的 .zshrc
+# 5. 生成完整的 .zshrc
 # ============================================================
 log_info "生成 ~/.zshrc..."
 
 cat > ~/.zshrc << 'EOF'
 # ============================================================
 # Zsh Configuration for Alpine Linux
-# 基于 Alpine apk 插件路径
+# 完整版，包含所有快捷键和别名
 # ============================================================
 
 # ------------------------------------------------------------
@@ -114,6 +110,30 @@ setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS
 # Misc
 # ------------------------------------------------------------
 setopt EXTENDED_GLOB NO_CASE_GLOB INTERACTIVE_COMMENTS
+
+# ------------------------------------------------------------
+# Key Bindings (Emacs mode)
+# ------------------------------------------------------------
+bindkey -e
+
+bindkey '^U' backward-kill-line
+bindkey '^K' kill-line
+bindkey '^W' backward-kill-word
+bindkey '^[d' kill-word
+bindkey '^[[3~' delete-char
+bindkey '^[[3;5~' kill-word
+
+bindkey '^[[H' beginning-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[OH' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[OF' end-of-line
+
+bindkey '^[[1;5D' backward-word
+bindkey '^[^[[D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[^[[C' forward-word
 
 # ------------------------------------------------------------
 # Aliases (eza 优先)
@@ -143,9 +163,10 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' verbose yes
+zstyle ':completion:*' completer _expand _complete _ignored
 
 # ------------------------------------------------------------
-# Syntax Highlighting
+# Syntax Highlighting (MUST BE LAST)
 # ------------------------------------------------------------
 if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -166,16 +187,17 @@ fi
 if [ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
     source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-    # 基础上下键
     bindkey '^[[A' up-line-or-history
     bindkey '^[[B' down-line-or-history
     bindkey '^[OA' up-line-or-history
     bindkey '^[OB' down-line-or-history
     bindkey '^R' history-incremental-search-backward
 
-    # Alt+↑ / Alt+↓
     bindkey '^[[1;3A' history-substring-search-up
     bindkey '^[[1;3B' history-substring-search-down
+
+    bindkey '^[[1;2A' up-history
+    bindkey '^[[1;2B' down-history
 fi
 
 # ------------------------------------------------------------
@@ -185,12 +207,22 @@ if [ -f /usr/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme ]; then
     source /usr/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
+
+# ------------------------------------------------------------
+# 颜色重置钩子（解决补全历史后残红）
+# ------------------------------------------------------------
+precmd() {
+    #tput sgr0
+    #print -n "%{$reset_color%}"
+    #print -n "%f"
+}
+
 EOF
 
 log_success ".zshrc 生成完成"
 
 # ============================================================
-# 设置 Zsh 为默认 Shell
+# 6. 设置 Zsh 为默认 Shell
 # ============================================================
 log_info "设置 Zsh 为默认 Shell..."
 ZSH_PATH=$(command -v zsh)
@@ -207,13 +239,13 @@ else
 fi
 
 # ============================================================
-# 完成
+# 7. 完成
 # ============================================================
 echo ""
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}✅ 安装完成！${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
-echo "运行 ${BLUE}zsh${NC} 立即体验，或注销重新登录。"
-echo "Powerlevel10k 配置向导: ${BLUE}p10k configure${NC}"
-echo "日志文件: ${BLUE}$LOG_FILE${NC}"
+echo -e "运行 ${BLUE}zsh${NC} 立即体验，或注销重新登录。"
+echo -e "Powerlevel10k 配置向导: ${BLUE}p10k configure${NC}"
+echo -e "日志文件: ${BLUE}$LOG_FILE${NC}"
