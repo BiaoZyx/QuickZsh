@@ -94,11 +94,11 @@ fi
 EOF
 
 echo "${YELLOW}[3/5] 设置 Zsh 为默认 Shell...${NC}"
-if [ "$SHELL" != "/usr/bin/zsh" ]; then
-    if chsh -s /usr/bin/zsh 2>/dev/null; then
+if [ "$SHELL" != "/bin/zsh" ]; then
+    if chsh -s /bin/zsh 2>/dev/null; then
         echo "${GREEN}已设置 Zsh 为默认 Shell${NC}"
     else
-        doas chsh -s /usr/bin/zsh "$USER"
+        doas chsh -s /bin/zsh "$USER"
     fi
 fi
 
