@@ -1,8 +1,16 @@
-# 总览&简介
-这是一个没有框架的zsh配置，  
-你可以使用`./setup_zsh.sh`进行快速交互式安装，  
-也可以用`.setup_zsh.sh -y`完全安装。  
+# QuickZsh
+## Introduction
+This project is a set of zsh configs with out framwork.   
+Normally, you can run `./setup_zsh.sh` to install it,   
+or use `./setup_zsh.sh -y` to install it without notice.    
 
-如果已经安装过一次，可以直接复制目录下的`.zshrc`到主目录。  
+This script support these **Linux** distros and **macOS**:
+  1. Debian
+  2. Arch
+  3. Fedora
+  4. Void
+  5. OpenWRT
+  6. Alpine 
 
-更新信息我会写进此文件。  
+## Keybindings
+|    Key     |       
