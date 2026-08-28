@@ -3,6 +3,7 @@
 This project is a set of zsh configs with out framwork.   
 Normally, you can run `./setup_zsh.sh` to install it,   
 or use `./setup_zsh.sh -y` to install it without notice.    
+The Script will use `doas` or `sudo` smartly.  
 
 This script support these **Linux** distros and **macOS**:
   1. Debian
