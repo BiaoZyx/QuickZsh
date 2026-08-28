@@ -31,14 +31,14 @@ NC='\033[0m'
 # 运行时配置（会被命令行参数修改）
 # ============================================================
 VERSION=2.4
-USE_MIRROR=false                                         # 是否使用 kkgithub.com 镜像加速 git clone
-NON_INTERACTIVE=false                                    # 非交互模式（-y）：跳过所有用户询问，采用默认值
-QUIET_MODE=false                                         # 静默模式（-q）：不输出到终端，只写日志
-PKG_MANAGER=""                                           # 包管理器名称：apt/pacman/dnf/xbps/brew
-PKG_UPDATE=""                                            # 更新包数据库的命令
-PKG_INSTALL=""                                           # 安装软件包的命令
-DISTRO=""                                                # 发行版名称（用于显示）
-LOG_FILE="$HOME/.zsh_install_$(date +%Y%m%d_%H%M%S).log" # 日志文件，按时间戳命名
+USE_MIRROR=false                                          # 是否使用 kkgithub.com 镜像加速 git clone
+NON_INTERACTIVE=false                                     # 非交互模式（-y）：跳过所有用户询问，采用默认值
+QUIET_MODE=false                                          # 静默模式（-q）：不输出到终端，只写日志
+PKG_MANAGER=""                                            # 包管理器名称：apt/pacman/dnf/xbps/brew
+PKG_UPDATE=""                                             # 更新包数据库的命令
+PKG_INSTALL=""                                            # 安装软件包的命令
+DISTRO=""                                                 # 发行版名称（用于显示）
+LOG_FILE="$HOME/.zsh_install_$(date +%Y%m%d_%H%M%S).log"  # 日志文件，按时间戳命名
 
 # ============================================================
 # 错误处理函数
@@ -70,28 +70,28 @@ EOF
 # ============================================================
 # 日志函数（静默模式下只写文件，不输出到终端）
 # ============================================================
-log_info() {
+log_info() {    # 普通操作
   echo -e "${BLUE}[*] $1${NC}" >>"$LOG_FILE"
   if [[ "$QUIET_MODE" != true ]]; then
     echo -e "${BLUE}[*] $1${NC}"
   fi
 }
 
-log_success() {
+log_success() { # 操作完成
   echo -e "${GREEN}[✓] $1${NC}" >>"$LOG_FILE"
   if [[ "$QUIET_MODE" != true ]]; then
     echo -e "${GREEN}[✓] $1${NC}"
   fi
 }
 
-log_warning() {
+log_warning() { # 警告
   echo -e "${YELLOW}[!] $1${NC}" >>"$LOG_FILE"
   if [[ "$QUIET_MODE" != true ]]; then
     echo -e "${YELLOW}[!] $1${NC}"
   fi
 }
 
-log_error() {
+log_error() {   # 操作错误
   echo -e "${RED}[✗] $1${NC}" >>"$LOG_FILE"
   if [[ "$QUIET_MODE" != true ]]; then
     echo -e "${RED}[✗] $1${NC}"
@@ -105,7 +105,7 @@ detect_distro() {
   log_info "Detecting system distribution..."
 
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "You're using Linux with GLibC Library now. "
+    #echo "You're using Linux with GLibC Library now. "
     if command -v doas &>/dev/null; then
       alias sudo=doas
     elif command -v sudo &>/dev/null; then
@@ -144,8 +144,8 @@ detect_distro() {
       log_error "No supported package manager found"
       exit 1
     fi
-  elif [[ "$OSTYPE" == "linux-musl" ]]; then
-    echo "You are using Linux with Musl C Library. "
+  elif [[ "$OSTYPE" == "linux-musl"* ]]; then
+    #echo "You are using Linux with Musl C Library now. "
     if command -v apk &>/dev/null; then
       PKG_MANAGER="apk"
       PKG_UPDATE="sudo apk update"
@@ -163,7 +163,7 @@ detect_distro() {
       DISTRO="Void-Musl"
     fi
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "You're using macOS now. "
+    #echo "You're using macOS now. "
     if command -v brew &>/dev/null; then
       PKG_MANAGER="brew"
       PKG_UPDATE="brew update"
