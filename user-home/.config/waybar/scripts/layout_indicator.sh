@@ -2,51 +2,30 @@
 
 set -euo pipefail
 
-ws_name=$(swaymsg -t get_workspaces | jq -r '
-  .[] | select(.focused == true) | .name
+FOCUSED_JSON=$(swaymsg -t get_tree)
+
+# 取 representation 第一个字母
+WS_NAME=$(echo "$FOCUSED_JSON" | jq -r '.nodes[] | select(.focused) | .name')
+REPRESENTATION=$(echo "$FOCUSED_JSON" | jq -r --arg ws "$WS_NAME" '
+  [.nodes[] | select(.name == $ws)][0].representation // ""
 ')
+LAYOUT=$(echo "$REPRESENTATION" | head -c 1)
+LAYOUT=${LAYOUT:-H}
 
-rep=$(swaymsg -t get_tree | jq -r --arg ws "$ws_name" '
-  [.. | objects | select(.type == "workspace" and .name == $ws)] | .[0].representation // ""
-')
+# representation 为 null 时（单窗口），fallback 到父容器 layout
+if [[ "$REPRESENTATION" == "" || "$REPRESENTATION" == "null" ]]; then
+  LAYOUT=$(echo "$FOCUSED_JSON" | jq -r '
+    [.. | objects | select(.focused == true and .app_id != null)][0] as $leaf |
+    [.. | objects | select(.nodes[]? | select(.id == $leaf.id))][0].layout // "splith"
+  ')
+fi
 
-layout=$(echo "$rep" | grep -oP '[A-Z](?=\[)' | tail -1 || true)
-layout=${layout:-H}
-
-case "$layout" in
-  H)
-    icon="H"
-    class="layout-H"
-    ;;
-  V)
-    icon="V"
-    class="layout-V"
-    ;;
-  T)
-    icon="T"
-    class="layout-T"
-    ;;
-  S)
-    icon="S"
-    class="layout-S"
-    ;;
-  F)
-    icon="F"
-    class="layout-F"
-    ;;
-  D)
-    icon="D"
-    class="layout-D"
-    ;;
-  O)
-    icon="O"
-    class="layout-O"
-    ;;
-  *)
-    icon="$layout"
-    class=""
-    ;;
+case "$LAYOUT" in
+  splith)   icon=" H"; class="layout-H" ;;
+  splitv)   icon=" V"; class="layout-V" ;;
+  tabbed)   icon=" T"; class="layout-T" ;;
+  stacked)  icon=" S"; class="layout-S" ;;
+  *)        icon=" $LAYOUT"; class="" ;;
 esac
 
-jq -c -n --arg text "$icon" --arg class "$class" \
-  '{text:$text, class:$class}'
+jq -c -n --arg text "$icon" --arg class "$class" '{text:$text, class:$class}'

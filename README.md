@@ -8,6 +8,13 @@ It is best used on Alpine Linux, but you can fork it and adapt it to other distr
 ### Why is there no `setup.sh`?
 There is no `setup.sh` because I am worried that it might overwrite your existing configs. So you should back up the configs you already have, and then copy the ones in this repo to your system yourself.
 
+### Screenshots
+> Normal mode with a foot terminal
+> [!image](./screenshot1.png)
+
+> Privacy Indicator
+> [!image](./screenshot2.png)
+
 ## Requirements
 ### Core packages
 #### System
