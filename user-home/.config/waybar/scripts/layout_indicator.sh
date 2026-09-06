@@ -21,11 +21,11 @@ if [[ "$REPRESENTATION" == "" || "$REPRESENTATION" == "null" ]]; then
 fi
 
 case "$LAYOUT" in
-  splith)   icon=" H"; class="layout-H" ;;
-  splitv)   icon=" V"; class="layout-V" ;;
-  tabbed)   icon=" T"; class="layout-T" ;;
-  stacked)  icon=" S"; class="layout-S" ;;
-  *)        icon=" $LAYOUT"; class="" ;;
+  splith)   icon="H"; class="layout-H" ;;
+  splitv)   icon="V"; class="layout-V" ;;
+  tabbed)   icon="T"; class="layout-T" ;;
+  stacked)  icon="S"; class="layout-S" ;;
+  *)        icon="$LAYOUT"; class="" ;;
 esac
 
 jq -c -n --arg text "$icon" --arg class "$class" '{text:$text, class:$class}'
