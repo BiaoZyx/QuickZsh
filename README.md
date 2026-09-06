@@ -1,19 +1,24 @@
 # Alpine-Sway-Dotfiles
+
+Sway window manager dotfiles for Alpine Linux — kept simple and readable, with a few helpers for getting Alpine set up.
+
 ## Introduction
-### What is it?
-This repo contains the dotfiles for my Sway setup on Alpine Linux. It is kept simple and easy to read, and it also includes some helpers for setting up Alpine. I hope it can help you too.
 
-It is best used on Alpine Linux, but you can fork it and adapt it to other distros.
+This is a minimal, tweakable Sway setup for Alpine Linux. It favors clarity over cleverness, so you can read each config and adjust it to fit your own workflow. Alongside the configs there are some helper notes for setting things up on Alpine.
 
-### Why is there no `setup.sh`?
-There is no `setup.sh` because I am worried that it might overwrite your existing configs. So you should back up the configs you already have, and then copy the ones in this repo to your system yourself.
+It's written for Alpine Linux, but it's portable — fork it and adapt it to any other distro.
+
+> There's intentionally no `setup.sh`. Automating the copy would risk clobbering configs you already have. Instead, back up your existing configs and copy the ones here over yourself.
 
 ### Screenshots
-> Normal mode with a foot terminal
-> [!image](./screenshot1.png)
 
-> Privacy Indicator
-> [!image](./screenshot2.png)
+Normal mode with a foot terminal:
+
+![Normal mode with a foot terminal](./screenshot1.png)
+
+Privacy indicator (mic/camera in use):
+
+![Privacy Indicator](./screenshot2.png)
 
 ## Requirements
 ### Core packages
