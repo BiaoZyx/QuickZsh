@@ -1,3 +1,4 @@
 exec swayidle -w timeout 600 'swaylock & loginctl suspend'  # 10 分钟后睡眠
-for_window [app_id="^.*"] inhibit_idle fullscreen           # 有应用全屏阻止睡眠
+for_window [app_id="^.*"] inhibit_idle fullscreen
+                                                            # 有应用全屏阻止睡眠
 exec wayland-pipewire-idle-inhibit                          # 有媒体播放阻止睡眠

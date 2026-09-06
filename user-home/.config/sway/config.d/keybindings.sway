@@ -49,8 +49,10 @@ bindsym $mod+Shift+e exec swaymsg exit
 #bindsym $mod+Shift+e exec pkill -f sway     # This one help you exit sway when lightdm has some problem.
 
 # Windows'
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 floating_modifier $mod normal
+
 # 焦点移动
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down

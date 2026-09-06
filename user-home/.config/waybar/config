@@ -4,8 +4,8 @@
     "height": 20,
     "spacing": 8,
 
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/privacy-dots"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/layout"],
+    "modules-center": ["custom/privacy", "sway/window"],
     "modules-right": ["network", "pulseaudio", "cpu", "memory", "clock", /*"custom/clipman", "custom/notif",*/ "tray", "custom/power"],
 
     "sway/workspaces": {
@@ -47,10 +47,17 @@
         "spacing": 8
     },
 
-    "custom/privacy-dots": {
-        "exec": "~/.config/waybar/scripts/privacy_dots.sh",
+    "custom/layout": {
+        "exec": "~/.config/waybar/scripts/layout_indicator.sh",
         "return-type": "json",
-        "interval": 3,
+        "interval": 0.5,
+        "format": "{}"
+    },
+    
+    "custom/privacy": {
+        "exec": "~/.config/waybar/scripts/privacy_indicator.sh",
+        "return-type": "json",
+        "interval": 0.5,
         "format": "{}"
     },
 

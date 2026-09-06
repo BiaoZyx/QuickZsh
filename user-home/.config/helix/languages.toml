@@ -1,0 +1,666 @@
+# Helix 文件类型检测规则
+# 参考 Vim filetype detection，补充 Helix 默认不覆盖的规则
+
+# Bash - shebang 和 glob
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = ["sh", "bash", "zsh", "fish", { glob = "*.bashrc" }, { glob = "*.zshrc" }, { glob = "*.bash_aliases" }, { glob = "*.bash_profile" }, { glob = "*.zshenv" }, { glob = "*.zlogin" }, { glob = "*.zlogout" }, { glob = ".bashrc" }, { glob = ".zshrc" }, { glob = ".profile" }]
+shebangs = ["sh", "bash", "dash", "zsh", "fish"]
+
+# Vim 配置
+[[language]]
+name = "vim"
+scope = "source.vim"
+file-types = ["vim", "vimrc", ".vimrc", { glob = "*.vim" }, { glob = "vimrc" }, { glob = ".vimrc" }, { glob = "init.vim" }, { glob = ".config/nvim/init.vim" }]
+
+# Neovim Lua 配置
+[[language]]
+name = "lua"
+scope = "source.lua"
+file-types = ["lua", { glob = "*.lua" }, { glob = "init.lua" }, { glob = ".config/nvim/init.lua" }]
+
+[[language]]
+name = "tmux"
+scope = "source.tmux"
+file-types = ["tmux", "tmux.conf", { glob = ".tmux.conf" }, { glob = "tmux.conf" }]
+
+# Git 配置
+[[language]]
+name = "git-config"
+scope = "source.gitconfig"
+file-types = [{ glob = ".gitconfig" }, { glob = ".gitmodules" }, { glob = ".gitattributes" }, { glob = ".gitignore" }, { glob = "*.gitconfig" }]
+
+# Docker
+[[language]]
+name = "dockerfile"
+scope = "source.dockerfile"
+file-types = [{ glob = "Dockerfile" }, { glob = "Dockerfile.*" }, { glob = "*.dockerfile" }, { glob = "docker-compose.yml" }, { glob = "docker-compose.yaml" }]
+
+# Makefile
+[[language]]
+name = "makefile"
+scope = "source.makefile"
+file-types = [{ glob = "Makefile" }, { glob = "makefile" }, { glob = "GNUmakefile" }, { glob = "*.mk" }]
+
+# CMake
+[[language]]
+name = "cmake"
+scope = "source.cmake"
+file-types = [{ glob = "CMakeLists.txt" }, { glob = "*.cmake" }]
+
+# Meson
+[[language]]
+name = "meson"
+scope = "source.meson"
+file-types = [{ glob = "meson.build" }, { glob = "meson_options.txt" }]
+
+# Nix
+[[language]]
+name = "nix"
+scope = "source.nix"
+file-types = ["nix", { glob = "*.nix" }, { glob = "flake.nix" }, { glob = "shell.nix" }, { glob = "default.nix" }]
+
+# JSON with comments (VS Code style)
+[[language]]
+name = "json"
+scope = "source.json"
+file-types = ["json", "jsonl", { glob = "package.json" }, { glob = "package-lock.json" }, { glob = "tsconfig.json" }, { glob = "Cargo.toml" }, { glob = ".vscode/*.json" }]
+
+# YAML
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yaml", "yml", { glob = ".yamllint" }, { glob = ".yamllint.yml" }]
+
+# TOML
+[[language]]
+name = "toml"
+scope = "source.toml"
+file-types = ["toml", { glob = "*.toml" }, { glob = "Cargo.toml" }, { glob = "pyproject.toml" }, { glob = "setup.cfg" }, { glob = "go.work" }, { glob = "biome.json" }]
+
+# Markdown
+[[language]]
+name = "markdown"
+scope = "text.markdown"
+file-types = ["md", "markdown", "mdown", "mkd", { glob = "*.md" }, { glob = "*.markdown" }, { glob = "README*" }, { glob = "CHANGELOG*" }, { glob = "CONTRIBUTING*" }]
+
+# HTML
+[[language]]
+name = "html"
+scope = "text.html"
+file-types = ["html", "htm", "xhtml", { glob = "*.html" }, { glob = "*.htm" }, { glob = "*.xhtml" }]
+
+# CSS
+[[language]]
+name = "css"
+scope = "source.css"
+file-types = ["css", { glob = "*.css" }, { glob = "*.scss" }, { glob = "*.less" }]
+
+# JavaScript
+[[language]]
+name = "javascript"
+scope = "source.js"
+file-types = ["js", "jsx", "mjs", "cjs", { glob = "*.js" }, { glob = "*.jsx" }, { glob = "*.mjs" }]
+
+# TypeScript
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts", "tsx", "mts", "cts", { glob = "*.ts" }, { glob = "*.tsx" }]
+
+# Python
+[[language]]
+name = "python"
+scope = "source.python"
+file-types = ["py", "pyw", "pyi", { glob = "*.py" }, { glob = "*.pyw" }, { glob = "Pipfile" }, { glob = "pyproject.toml" }, { glob = "setup.py" }, { glob = "setup.cfg" }]
+shebangs = ["python", "python3", "python2"]
+
+# Go
+[[language]]
+name = "go"
+scope = "source.go"
+file-types = ["go", { glob = "*.go" }, { glob = "go.mod" }, { glob = "go.sum" }]
+
+# Rust
+[[language]]
+name = "rust"
+scope = "source.rust"
+file-types = ["rs", { glob = "*.rs" }, { glob = "Cargo.toml" }, { glob = "Cargo.lock" }]
+
+# C/C++
+[[language]]
+name = "c"
+scope = "source.c"
+file-types = ["c", "h", { glob = "*.c" }, { glob = "*.h" }]
+
+[[language]]
+name = "cpp"
+scope = "source.cpp"
+file-types = ["cpp", "cxx", "cc", "c++", "hpp", "hxx", "hh", { glob = "*.cpp" }, { glob = "*.hpp" }, { glob = "*.cc" }]
+
+# Java
+[[language]]
+name = "java"
+scope = "source.java"
+file-types = ["java", { glob = "*.java" }, { glob = "pom.xml" }, { glob = "build.gradle" }]
+
+# Shell scripts without extension
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = [{ glob = "configure" }, { glob = "configure.ac" }, { glob = "configure.in" }]
+shebangs = ["sh", "bash", "dash", "zsh", "fish"]
+
+# AWK
+[[language]]
+name = "awk"
+scope = "source.awk"
+file-types = ["awk", "gawk", "mawk", "nawk", { glob = "*.awk" }]
+shebangs = ["awk", "gawk", "mawk", "nawk"]
+
+# Perl
+[[language]]
+name = "perl"
+scope = "source.perl"
+file-types = ["pl", "pm", "t", "pod", { glob = "*.pl" }, { glob = "*.pm" }, { glob = "*.t" }]
+shebangs = ["perl"]
+
+# Ruby
+[[language]]
+name = "ruby"
+scope = "source.ruby"
+file-types = ["rb", "rake", "gemspec", "rbw", { glob = "*.rb" }, { glob = "Rakefile" }, { glob = "Gemfile" }]
+shebangs = ["ruby"]
+
+# PHP
+[[language]]
+name = "php"
+scope = "source.php"
+file-types = ["php", "phtml", "php3", "php4", "php5", "php7", "php8", { glob = "*.php" }]
+shebangs = ["php"]
+
+# Haskell
+[[language]]
+name = "haskell"
+scope = "source.haskell"
+file-types = ["hs", "lhs", "cabal", { glob = "*.hs" }, { glob = "*.lhs" }, { glob = "*.cabal" }, { glob = "stack.yaml" }]
+
+# Elixir
+[[language]]
+name = "elixir"
+scope = "source.elixir"
+file-types = ["ex", "exs", { glob = "*.ex" }, { glob = "*.exs" }, { glob = "mix.exs" }]
+shebangs = ["elixir"]
+
+# Erlang
+[[language]]
+name = "erlang"
+scope = "source.erlang"
+file-types = ["erl", "hrl", { glob = "*.erl" }, { glob = "*.hrl" }]
+shebangs = ["erl"]
+
+# Lua
+[[language]]
+name = "lua"
+scope = "source.lua"
+file-types = ["lua", { glob = "*.lua" }, { glob = "init.lua" }]
+shebangs = ["lua", "luajit"]
+
+# SQL
+[[language]]
+name = "sql"
+scope = "source.sql"
+file-types = ["sql", "mysql", "pgsql", { glob = "*.sql" }]
+
+# GraphQL
+[[language]]
+name = "graphql"
+scope = "source.graphql"
+file-types = ["graphql", "gql", { glob = "*.graphql" }, { glob = "*.gql" }]
+
+# Protobuf
+[[language]]
+name = "protobuf"
+scope = "source.protobuf"
+file-types = ["proto", { glob = "*.proto" }]
+
+# Zig
+[[language]]
+name = "zig"
+scope = "source.zig"
+file-types = ["zig", { glob = "*.zig" }]
+
+# Nim
+[[language]]
+name = "nim"
+scope = "source.nim"
+file-types = ["nim", "nimble", { glob = "*.nim" }, { glob = "*.nimble" }]
+
+# Dart
+[[language]]
+name = "dart"
+scope = "source.dart"
+file-types = ["dart", { glob = "*.dart" }]
+shebangs = ["dart"]
+
+# Kotlin
+[[language]]
+name = "kotlin"
+scope = "source.kotlin"
+file-types = ["kt", "kts", { glob = "*.kt" }, { glob = "*.kts" }]
+
+# Swift
+[[language]]
+name = "swift"
+scope = "source.swift"
+file-types = ["swift", { glob = "*.swift" }]
+
+# Scala
+[[language]]
+name = "scala"
+scope = "source.scala"
+file-types = ["scala", "sc", { glob = "*.scala" }]
+
+# Clojure
+[[language]]
+name = "clojure"
+scope = "source.clojure"
+file-types = ["clj", "cljs", "cljc", "edn", { glob = "*.clj" }, { glob = "*.cljs" }, { glob = "*.edn" }]
+
+# Lisp
+[[language]]
+name = "lisp"
+scope = "source.lisp"
+file-types = ["lisp", "el", "lsp", { glob = "*.lisp" }, { glob = "*.el" }]
+
+# Scheme
+[[language]]
+name = "scheme"
+scope = "source.scheme"
+file-types = ["scm", "ss", "sls", { glob = "*.scm" }, { glob = "*.ss" }]
+
+# OCaml
+[[language]]
+name = "ocaml"
+scope = "source.ocaml"
+file-types = ["ml", "mli", "mly", "mll", { glob = "*.ml" }, { glob = "*.mli" }]
+
+# F#
+[[language]]
+name = "fsharp"
+scope = "source.fsharp"
+file-types = ["fs", "fsx", "fsi", "fsscript", { glob = "*.fs" }, { glob = "*.fsx" }]
+
+# Elm
+[[language]]
+name = "elm"
+scope = "source.elm"
+file-types = ["elm", { glob = "*.elm" }]
+
+# PureScript
+[[language]]
+name = "purescript"
+scope = "source.purescript"
+file-types = ["purs", { glob = "*.purs" }]
+
+# R
+[[language]]
+name = "r"
+scope = "source.r"
+file-types = ["r", "R", "rmd", "Rmd", { glob = "*.r" }, { glob = "*.R" }, { glob = "*.rmd" }, { glob = "*.Rmd" }]
+shebangs = ["Rscript"]
+
+# Julia
+[[language]]
+name = "julia"
+scope = "source.julia"
+file-types = ["jl", { glob = "*.jl" }]
+shebangs = ["julia"]
+
+# LaTeX
+[[language]]
+name = "latex"
+scope = "text.tex"
+file-types = ["tex", "sty", "cls", "bib", { glob = "*.tex" }, { glob = "*.sty" }, { glob = "*.cls" }, { glob = "*.bib" }]
+
+# CSV
+[[language]]
+name = "csv"
+scope = "source.csv"
+file-types = ["csv", "tsv", { glob = "*.csv" }, { glob = "*.tsv" }]
+
+# ini/config/dosini
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = ["ini", "cfg", "conf", { glob = "*.ini" }, { glob = "*.cfg" }, { glob = "*.conf" }, { glob = "*.dosini" }]
+
+# 常见系统配置文件 (conf)
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "resolv.conf" }, { glob = "hosts" }, { glob = "fstab" }, { glob = "passwd" }, { glob = "group" }, { glob = "shadow" }, { glob = "sudoers" }, { glob = "nsswitch.conf" }, { glob = "sysctl.conf" }, { glob = "sysctl.d/*" }, { glob = "modprobe.d/*" }, { glob = "udev/rules.d/*" }]
+
+# 网络配置
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "network/interfaces" }, { glob = "NetworkManager/conf.d/*" }, { glob = "wpa_supplicant.conf" }, { glob = "dhclient.conf" }]
+
+# SSH 配置
+[[language]]
+name = "ssh-config"
+scope = "source.sshconfig"
+file-types = [{ glob = ".ssh/config" }, { glob = ".ssh/config.d/*" }, { glob = "ssh_config" }, { glob = "sshd_config" }]
+
+# Nginx/Apache
+[[language]]
+name = "nginx"
+scope = "source.nginx"
+file-types = [{ glob = "nginx.conf" }, { glob = "nginx/*.conf" }, { glob = "sites-available/*" }, { glob = "sites-enabled/*" }, { glob = "*.nginx" }]
+
+[[language]]
+name = "apache"
+scope = "source.apache"
+file-types = [{ glob = "httpd.conf" }, { glob = "apache2.conf" }, { glob = ".htaccess" }, { glob = "*.apache" }]
+
+# DNS 配置
+[[language]]
+name = "bindzone"
+scope = "source.bindzone"
+file-types = [{ glob = "named.conf" }, { glob = "named.conf.local" }, { glob = "*.zone" }, { glob = "db.*" }]
+
+# Cron 配置
+[[language]]
+name = "crontab"
+scope = "source.crontab"
+file-types = [{ glob = "crontab" }, { glob = "*.cron" }, { glob = "cron.d/*" }, { glob = "etc/crontab" }]
+
+# Logrotate
+[[language]]
+name = "conf"
+scope = "source.conf"
+file-types = [{ glob = "logrotate.conf" }, { glob = "logrotate.d/*" }]
+
+# Pacman (Arch)
+[[language]]
+name = "conf"
+scope = "source.conf"
+file-types = [{ glob = "pacman.conf" }, { glob = "makepkg.conf" }, { glob = "pacman.d/*" }]
+
+# APT (Debian/Ubuntu)
+[[language]]
+name = "conf"
+scope = "source.conf"
+file-types = [{ glob = "sources.list" }, { glob = "sources.list.d/*" }, { glob = "apt.conf" }, { glob = "apt.conf.d/*" }]
+
+# DNF/YUM (Fedora/RHEL)
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "dnf.conf" }, { glob = "yum.conf" }, { glob = "yum.repos.d/*" }]
+
+# systemd
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "*.service" }, { glob = "*.timer" }, { glob = "*.socket" }, { glob = "*.mount" }, { glob = "*.automount" }, { glob = "*.target" }, { glob = "*.path" }, { glob = "*.scope" }, { glob = "systemd/*.conf" }, { glob = "systemd/system/*" }]
+
+# XDG
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "mimeapps.list" }, { glob = "defaults.list" }, { glob = "directories.list" }]
+
+# Input method
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "fcitx5/config" }, { glob = "ibus/config" }, { glob = ".xprofile" }, { glob = ".xinputrc" }]
+
+# Font config
+[[language]]
+name = "xml"
+scope = "text.xml"
+file-types = [{ glob = "fonts.conf" }, { glob = "fonts.dtd" }, { glob = "fontconfig/*.conf" }]
+
+# GTK/Qt
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "gtk-3.0/settings.ini" }, { glob = "gtk-2.0/gtkrc" }, { glob = "Trolltech.conf" }, { glob = "qt5ct.conf" }, { glob = "kvantum.conf" }]
+
+# Cursor/Theme
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "index.theme" }, { glob = "cursors/*" }, { glob = ".icons/*/index.theme" }]
+
+# Desktop entries
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "*.desktop" }, { glob = "*.directory" }, { glob = "autostart/*" }]
+
+# MIME type
+[[language]]
+name = "xml"
+scope = "text.xml"
+file-types = [{ glob = "mimeinfo.cache" }, { glob = "packages/mime.cache" }]
+
+# Xresources
+[[language]]
+name = "xresources"
+scope = "source.xresources"
+file-types = [{ glob = ".Xresources" }, { glob = ".Xdefaults" }, { glob = "xresources" }]
+
+# Xmodmap
+[[language]]
+name = "xmodmap"
+scope = "source.xmodmap"
+file-types = [{ glob = ".Xmodmap" }, { glob = "xmodmap" }]
+
+# Readline
+[[language]]
+name = "inputrc"
+scope = "source.inputrc"
+file-types = [{ glob = ".inputrc" }, { glob = "inputrc" }]
+
+# Fstab
+[[language]]
+name = "fstab"
+scope = "source.fstab"
+file-types = [{ glob = "fstab" }, { glob = "/etc/fstab" }]
+
+# Hosts
+[[language]]
+name = "hosts"
+scope = "source.hosts"
+file-types = [{ glob = "hosts" }, { glob = "/etc/hosts" }]
+
+# Resolv
+[[language]]
+name = "resolv"
+scope = "source.resolv"
+file-types = [{ glob = "resolv.conf" }, { glob = "/etc/resolv.conf" }]
+
+# Profile/login scripts
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = [{ glob = ".profile" }, { glob = ".bash_profile" }, { glob = ".bash_login" }, { glob = ".bash_logout" }, { glob = ".bash_history" }, { glob = ".zshenv" }, { glob = ".zprofile" }, { glob = ".zlogin" }, { glob = ".zlogout" }, { glob = ".zsh_history" }, { glob = ".zhistory" }]
+
+# Shell rc files
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = [{ glob = ".bashrc" }, { glob = ".zshrc" }, { glob = ".config/fish/config.fish" }, { glob = ".config/zsh/.zshrc" }, { glob = ".config/bash/bashrc" }]
+
+# Shell aliases/functions
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = [{ glob = ".bash_aliases" }, { glob = ".bash_functions" }, { glob = ".zsh_aliases" }, { glob = ".zsh_functions" }]
+
+# Complete list of conf files
+[[language]]
+name = "conf"
+scope = "source.conf"
+file-types = [{ glob = "*.conf" }, { glob = "*.cfg" }, { glob = "*.config" }]
+
+# SSH config
+[[language]]
+name = "ssh-config"
+scope = "source.sshconfig"
+file-types = [{ glob = ".ssh/config" }, { glob = "ssh/config" }, { glob = "*/.ssh/config" }]
+
+# Environment files
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = [{ glob = ".env" }, { glob = ".env.*" }, { glob = "*.env" }]
+
+# Systemd service files
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = "*.service" }, { glob = "*.timer" }, { glob = "*.socket" }]
+
+# Xorg config
+[[language]]
+name = "xorg"
+scope = "source.xorg"
+file-types = [{ glob = "xorg.conf" }, { glob = "*.conf" }]
+
+# GeoJSON
+[[language]]
+name = "json"
+scope = "source.json"
+file-types = [{ glob = "*.geojson" }]
+
+# EditorConfig
+[[language]]
+name = "ini"
+scope = "source.ini"
+file-types = [{ glob = ".editorconfig" }]
+
+# Justfile
+[[language]]
+name = "just"
+scope = "source.just"
+file-types = [{ glob = "Justfile" }, { glob = "justfile" }, { glob = "*.just" }]
+
+# Taskfile
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = [{ glob = "Taskfile.yml" }, { glob = "Taskfile.yaml" }]
+
+# Helm charts
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = [{ glob = "Chart.yaml" }, { glob = "values.yaml" }]
+
+# Kubernetes manifests
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = [{ glob = "deployment.yaml" }, { glob = "service.yaml" }, { glob = "configmap.yaml" }]
+
+# Terraform
+[[language]]
+name = "hcl"
+scope = "source.hcl"
+file-types = ["tf", "tfvars", "hcl", { glob = "*.tf" }, { glob = "*.tfvars" }, { glob = "*.hcl" }]
+
+# Ansible
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = [{ glob = "playbook.yml" }, { glob = "playbook.yaml" }, { glob = "roles/*/tasks/*.yml" }]
+
+# Puppet
+[[language]]
+name = "puppet"
+scope = "source.puppet"
+file-types = ["pp", { glob = "*.pp" }, { glob = "Puppetfile" }]
+
+# Chef
+[[language]]
+name = "ruby"
+scope = "source.ruby"
+file-types = [{ glob = "Berksfile" }, { glob = "Vagrantfile" }, { glob = "Guardfile" }]
+
+# Gradle
+[[language]]
+name = "groovy"
+scope = "source.groovy"
+file-types = ["gradle", { glob = "*.gradle" }, { glob = "*.gradle.kts" }]
+
+# Maven
+[[language]]
+name = "xml"
+scope = "text.xml"
+file-types = [{ glob = "pom.xml" }]
+
+# Debian packaging
+[[language]]
+name = "deb"
+scope = "source.deb"
+file-types = [{ glob = "debian/control" }, { glob = "debian/rules" }]
+
+# RPM spec
+[[language]]
+name = "spec"
+scope = "source.spec"
+file-types = [{ glob = "*.spec" }]
+
+# Vim help files
+[[language]]
+name = "vim"
+scope = "source.vim"
+file-types = [{ glob = "*.txt" }, { glob = "doc/*.txt" }]
+
+# Man pages
+[[language]]
+name = "man"
+scope = "text.man"
+file-types = [{ glob = "*.1" }, { glob = "*.2" }, { glob = "*.3" }, { glob = "*.4" }, { glob = "*.5" }, { glob = "*.6" }, { glob = "*.7" }, { glob = "*.8" }]
+
+# Info pages
+[[language]]
+name = "info"
+scope = "text.info"
+file-types = [{ glob = "*.info" }]
+
+# Readme files
+[[language]]
+name = "markdown"
+scope = "text.markdown"
+file-types = [{ glob = "README*" }, { glob = "readme*" }, { glob = "INSTALL*" }, { glob = "CONTRIBUTING*" }, { glob = "CHANGELOG*" }, { glob = "CHANGES*" }, { glob = "NEWS*" }, { glob = "AUTHORS*" }]
+
+# License files
+[[language]]
+name = "text"
+scope = "text.plain"
+file-types = [{ glob = "LICENSE*" }, { glob = "COPYING*" }, { glob = "PATENTS*" }]
+
+# Git files
+[[language]]
+name = "git-config"
+scope = "source.gitconfig"
+file-types = [{ glob = ".gitignore" }, { glob = ".gitattributes" }, { glob = ".gitmodules" }, { glob = ".gitmessage" }]
+
+# Editor backup files
+[[language]]
+name = "text"
+scope = "text.plain"
+file-types = [{ glob = "*~" }, { glob = "*.swp" }, { glob = "*.swo" }, { glob = "*.#" }]
+
+# Core dump files
+[[language]]
+name = "text"
+scope = "text.plain"
+file-types = [{ glob = "core" }, { glob = "core.*" }]

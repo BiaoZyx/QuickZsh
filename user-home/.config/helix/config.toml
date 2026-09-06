@@ -1,0 +1,42 @@
+# Helix 配置文件
+
+# 主题
+theme = "ao"
+
+# 快捷键设置
+[keys.normal]
+"C-w" = { W = ":toggle soft-wrap.enable" }  # C-w W 选用是否软换行
+
+# 编辑器设置
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+true-color = true
+idle-timeout = 0
+scrolloff = 5
+auto-pairs = true
+auto-completion = true
+auto-format = true
+
+[editor.cursor-shape]
+insert = "bar"       # 插入模式使用长条光标
+normal = "block"     # 普通模式使用方块光标
+select = "underline" # 选择模式使用下划线光标
+
+[editor.file-picker]
+hidden = false       # 文件选择器显示隐藏文件
+git-ignore = false   # 忽略 .gitignore 中的文件
+
+[editor.indent-guides]
+render = true
+character = "│"
+
+[editor.soft-wrap]
+enable = true        # 长行自动软换行（不插入实际换行）
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"

@@ -33,20 +33,21 @@
 @define-color sky #89dceb;
 
 /* ========================================
-   整体栏样式
+   整体栏样式 - 毛玻璃
    ======================================== */
 #waybar {
-    background: rgba(30, 30, 46, 0.85);
+    background: rgba(20, 18, 24, 0.65);
     color: @text;
     font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK SC", "Noto Color Emoji";
     font-size: 10px;
     font-weight: 500;
 
-    border-radius: 0 0 8px 8px;
-    margin: 0 12px 0 12px;
-    padding: 0px 8px;
-    border-bottom: 0.5px solid rgba(137, 180, 250, 0.3);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 10px 10px;
+    margin: 3px 8px 0 8px;
+    padding: 0px 10px;
+    border-bottom: 1px solid rgba(188, 165, 242, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    min-height: 16px;
 }
 
 /* ========================================
@@ -63,11 +64,13 @@
 #tray,
 #custom-clipman,
 #custom-notif,
-#custom-power {
-    padding: 0px 6px;
-    margin: 3px 0px;
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.2);
+#custom-power,
+#custom-layout,
+#custom-privacy {
+    padding: 0px 4px;
+    margin: 4px 0px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
     transition: all 0.2s ease;
 }
 
@@ -80,9 +83,8 @@
 #pulseaudio:hover,
 #clock:hover,
 #custom-clipman:hover,
-#custom-notif:hover/*,
-#custom-power:hover*/ {
-    background: rgba(255, 255, 255, 0.06);
+#custom-notif:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* ========================================
@@ -91,8 +93,8 @@
 #workspaces {
     padding: 0px 2px;
     margin: 3px 1px;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
 }
 
 #workspaces button {
@@ -100,23 +102,23 @@
     margin: 1px 1px;
     color: @subtext0;
     background: transparent;
-    border-radius: 7px;
+    border-radius: 5px;
     border: none;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     font-weight: 500;
     font-size: 11px;
 }
 
 #workspaces button:hover {
     color: @text;
-    background: rgba(137, 180, 250, 0.15);
+    background: rgba(188, 165, 242, 0.15);
 }
 
 #workspaces button.focused {
     color: @base;
-    background: @blue;
+    background: @mauve;
     font-weight: 600;
-    box-shadow: 0 0 10px rgba(137, 180, 250, 0.25);
+    box-shadow: 0 0 12px rgba(188, 165, 242, 0.3);
 }
 
 #workspaces button.urgent {
@@ -135,10 +137,10 @@
     color: @sapphire;
     font-weight: 600;
     background: rgba(116, 199, 236, 0.08);
-    border-radius: 8px;
-    padding: 0px 14px;
+    border-radius: 6px;
+    padding: 0px 10px;
     font-size: 12px;
-    margin: 3px 1px;                        /* ← 和其他模块保持一致 */
+    margin: 3px 1px;
 }
 
 /* 当没有窗口时，中间模块完全隐形 */
@@ -250,23 +252,59 @@ window#waybar.empty #window {
 }
 
 /* ========================================
-   模式指示
+    模式指示 (resize)
    ======================================== */
 #mode {
-    background: @peach;
-    color: @base;
+    color: @peach;
+    background: rgba(255, 218, 114, 0.1);
     font-weight: 700;
-    border-radius: 4px;
-    padding: 0px 8px;
+    border-radius: 6px;
+    padding: 0px 6px;
+    text-shadow: 0 0 6px rgba(255, 218, 114, 0.3);
 }
 
-#custom-privacy-dots {
+#custom-privacy {
     padding: 0 4px;
     font-size: 12px;
+    background: transparent;
+}
+
+#custom-layout {
+    padding: 0px 4px;
+    font-weight: bold;
+    font-size: 11px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+    background: transparent;
+}
+
+#custom-layout.layout-H {
+    color: @teal;
+    text-shadow: 0 0 6px rgba(148, 226, 213, 0.4);
+}
+
+#custom-layout.layout-V {
+    color: @sky;
+    text-shadow: 0 0 6px rgba(137, 220, 235, 0.4);
+}
+
+#custom-layout.layout-T {
+    color: @peach;
+    text-shadow: 0 0 6px rgba(255, 218, 114, 0.4);
+}
+
+#custom-layout.layout-S {
+    color: @mauve;
+    text-shadow: 0 0 6px rgba(188, 165, 242, 0.4);
+}
+
+#custom-layout.layout-F {
+    color: @red;
+    text-shadow: 0 0 6px rgba(255, 114, 143, 0.4);
 }
 
 /* ========================================
-   小调整
+    小调整
    ======================================== */
 #custom-clipman,
 #custom-notif {
