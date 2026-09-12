@@ -4,9 +4,9 @@
     "height": 20,
     "spacing": 8,
 
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/layout", "battery"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/layout"],
     "modules-center": ["custom/privacy", "sway/window"],
-    "modules-right": ["network", "pulseaudio", "cpu", "memory", "clock", /*"custom/clipman", "custom/notif",*/ "tray", "custom/power"],
+    "modules-right": ["network", "pulseaudio", "cpu", "memory", "battery", "clock", /*"custom/clipman", "custom/notif",*/ "tray", "custom/power"],
 
     "sway/workspaces": {
         //"disable-scroll": true,
@@ -34,7 +34,7 @@
     },
 
     "clock": {
-        "format": "{:%h:%m}",
+        "format": "{:%H:%M}",
         "format-alt": "{:%a %d %b}",
         "tooltip-format": "{:%Y-%m-%d %H:%M}"
     },
