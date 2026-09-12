@@ -311,3 +311,54 @@ window#waybar.empty #window {
     font-size: 11px;
     padding: 0px 4px;
 }
+
+/* ========================================
+   电池
+   ======================================== */
+#battery {
+    color: @green;
+    padding: 0px 4px;
+    margin: 4px 0px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+#battery:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 充电中 - 柔绿 */
+#battery.charging {
+    color: @green;
+    text-shadow: 0 0 6px rgba(127, 255, 154, 0.4);
+}
+
+/* 已插电但未充电（充满/Not charging） */
+#battery.plugged,
+#battery.full {
+    color: @teal;
+    text-shadow: 0 0 6px rgba(148, 226, 213, 0.4);
+}
+
+/* 警告电量 */
+#battery.warning:not(.charging) {
+    color: @peach;
+    text-shadow: 0 0 6px rgba(255, 218, 114, 0.4);
+}
+
+/* 严重低电量 - 红色 + 轻微闪烁提示 */
+#battery.critical:not(.charging) {
+    color: @red;
+    text-shadow: 0 0 6px rgba(255, 114, 143, 0.5);
+    animation: battery-blink 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes battery-blink {
+    from {
+        background: rgba(255, 114, 143, 0.08);
+    }
+    to {
+        background: rgba(255, 114, 143, 0.22);
+    }
+}
