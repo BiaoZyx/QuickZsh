@@ -40,6 +40,8 @@ bindsym $mod+n exec fnottctl dismiss                          # 关闭当前通�
 bindsym $mod+Shift+n exec fnottctl dismiss all                # 清空所有通知
 bindsym $mod+Ctrl+n exec fnottctl dismiss-with-default-action # 触发默认操作并关闭
 
+bindsym $mod+x exec ~/.config/waybar/scripts/power.sh
+
 # ------------------------------
 # Default Core Bindings
 # ------------------------------
