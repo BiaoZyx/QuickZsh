@@ -1,11 +1,11 @@
 # QuickZsh
 ## Introduction
-This project is a set of zsh configs with out framwork.   
+This project is a set of zsh configs without a framework.   
 Normally, you can run `./setup_zsh.sh` to install it,   
 or use `./setup_zsh.sh -y` to install it without notice.    
-The Script will use `doas` or `sudo` smartly.  
+The script will use `doas` or `sudo` smartly. Both setup scripts are written in POSIX sh, so `bash` is not required.
 
-This script support these **Linux** distros and **macOS**:
+This script supports these **Linux** distros and **macOS**:
   1. Debian
   2. Arch
   3. Fedora
@@ -16,17 +16,17 @@ This script support these **Linux** distros and **macOS**:
 ## Shortcut Keys
 | Keys         | Purpose                             |  
 |:------------:|:------------------------------------|
-| `Alt+UP`     | History-Subtring-Search-Up          |  
-| `Alt+DOWN`   | History-Subtring-Search-Down        |  
+| `Alt+UP`     | History-Substring-Search-Up         |  
+| `Alt+DOWN`   | History-Substring-Search-Down       |  
 | `Shift+UP`   | Up-History                          |  
 | `Shift+Down` | Down-History                        |  
 | `PageUp`     | Up-History                          |  
-| `PageDown`   | Down-Page                           |  
+| `PageDown`   | Down-History                        |  
 | `Ctrl+R`     | History-Incremental-Search-Backward |  
 
 ## Specially Prepared Aliases
 ### `ls`
-#### *If the coammand `eza` exsists*
+#### *If the command `eza` exists*
 | Aliases | The command actually executed |
 |:-------:|:------------------------------|
 | `ls`    | `eza`                         |
@@ -48,7 +48,7 @@ This script support these **Linux** distros and **macOS**:
 | `..`    | `cd ..`                       |
 | `...`   | `cd ../..`                    |
 | `....`  | `cd ../../..`                 |
-| . . .   | . . .                         |
+| `.....`  | `cd ../../../..`              |
 | `......`| `cd ../../../../..`           |
 
 ### Colored Outputs
@@ -73,7 +73,7 @@ This script support these **Linux** distros and **macOS**:
 ## How to install?
 ### Way 1 - Cloning the Repository
 #### If your system is supported *original script*(`setup_zsh.sh`)
-> Make sure you have these package on your system: `bash`, `git`, `curl`, `wget`, `shadow`
+> Make sure you have these packages on your system: a POSIX `sh` (e.g. dash/ash), `git`, `curl`, `wget`, `shadow`
 1. Clone the repository
 
 ```sh
@@ -117,17 +117,17 @@ chsh -s /bin/ksh       # Ksh  - 2
 
 #### Or your system is Alpine Linux:
 Out of my fondness for Alpine Linux, I customized the installation script for Alpine.
-So you can first follow the steps above, and then run `./setup_zsh-alpine.sh` rather tan `./setup_zsh.sh`.
+So you can first follow the steps above, and then run `./setup_zsh-alpine.sh` rather than `./setup_zsh.sh`.
 It will automatically install plugins from the Alpine repository instead of using the git repository. Of course, if you prefer to use the git version of the plugins, you can also use the original script, as I have also added support for Alpine to the original script.
-It is worth mentioning that the Alpine version's script use ash shell scripts instead of bash shell scripts.
+Both scripts are POSIX `sh` scripts now, so neither of them needs `bash`.
 
 ### Way 2 - Using the remote link of my Pages website(my blog site)
 - The original version:
 ```sh
-curl https://biaozyx.pages.dev/scripts/setup_zsh.sh | bash
+curl -fsSL https://biaozyx.pages.dev/scripts/setup_zsh.sh | sh
 ```
 
 - Alpine version:
 ```sh
-curl https://biaozyx.pages.dev/scripts/setup_zsh-alpine.sh | sh
+curl -fsSL https://biaozyx.pages.dev/scripts/setup_zsh-alpine.sh | sh
 ```
