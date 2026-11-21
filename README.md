@@ -23,6 +23,8 @@ This script supports these **Linux** distros and **macOS**:
 | `PageUp`     | Up-History                          |  
 | `PageDown`   | Down-History                        |  
 | `Ctrl+R`     | History-Incremental-Search-Backward |  
+| `Ctrl+BACKSPACE` | Backward-Kill-Word              |  
+| `Alt+BACKSPACE`  | Backward-Kill-Word              |  
 
 ## Specially Prepared Aliases
 ### `ls`
